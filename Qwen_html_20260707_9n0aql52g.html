@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>gogoweru - Game Developer Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a0a1a 100%);
+            color: #ffffff;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(157, 0, 255, 0.2);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            color: #9d00ff;
+            text-decoration: none;
+            text-shadow: 0 0 10px rgba(157, 0, 255, 0.5);
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            color: #ffffff;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-weight: 500;
+        }
+
+        nav a:hover {
+            color: #9d00ff;
+        }
+
+        /* Hero Section */
+        .hero {
+            margin-top: 80px;
+            padding: 100px 0;
+            text-align: center;
+            background: radial-gradient(circle at center, rgba(157, 0, 255, 0.1) 0%, transparent 70%);
+        }
+
+        .hero h1 {
+            font-size: 64px;
+            margin-bottom: 20px;
+            color: #9d00ff;
+            text-shadow: 0 0 20px rgba(157, 0, 255, 0.5);
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero p {
+            font-size: 24px;
+            color: #cccccc;
+            animation: fadeInUp 1s ease 0.2s backwards;
+        }
+
+        /* Sections */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-title {
+            font-size: 42px;
+            text-align: center;
+            margin-bottom: 60px;
+            color: #9d00ff;
+            text-shadow: 0 0 15px rgba(157, 0, 255, 0.3);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 18px;
+            text-align: center;
+            color: #cccccc;
+            line-height: 1.8;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .skill-card {
+            background: rgba(30, 20, 30, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            transition: all 0.3s ease;
+            text-align: center;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-10px);
+            border-color: #9d00ff;
+            box-shadow: 0 10px 30px rgba(157, 0, 255, 0.3);
+        }
+
+        .skill-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+
+        .skill-card h3 {
+            color: #9d00ff;
+            margin-bottom: 15px;
+            font-size: 24px;
+        }
+
+        .skill-card p {
+            color: #cccccc;
+            font-size: 16px;
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+        }
+
+        .project-card {
+            background: rgba(30, 20, 30, 0.8);
+            border-radius: 15px;
+            overflow: hidden;
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            border-color: #9d00ff;
+            box-shadow: 0 10px 30px rgba(157, 0, 255, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #2d1b4e 0%, #1a0a2e 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-content {
+            padding: 30px;
+        }
+
+        .project-card h3 {
+            color: #9d00ff;
+            margin-bottom: 15px;
+            font-size: 28px;
+        }
+
+        .project-card p {
+            color: #cccccc;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .project-tags {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .tag {
+            background: rgba(157, 0, 255, 0.2);
+            color: #9d00ff;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+        }
+
+        .platform-badge {
+            display: inline-block;
+            background: rgba(157, 0, 255, 0.3);
+            color: #ffffff;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Contacts Section */
+        .contacts-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .contact-card {
+            background: rgba(30, 20, 30, 0.8);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(157, 0, 255, 0.2);
+            text-align: center;
+            text-decoration: none;
+            color: #ffffff;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .contact-card:hover {
+            transform: translateY(-5px);
+            border-color: #9d00ff;
+            box-shadow: 0 10px 30px rgba(157, 0, 255, 0.3);
+        }
+
+        .contact-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .contact-card h3 {
+            color: #9d00ff;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+
+        .contact-card p {
+            color: #cccccc;
+            font-size: 16px;
+        }
+
+        /* Footer */
+        footer {
+            background: rgba(10, 10, 10, 0.95);
+            padding: 30px 0;
+            text-align: center;
+            border-top: 1px solid rgba(157, 0, 255, 0.2);
+        }
+
+        footer p {
+            color: #888888;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 42px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            nav ul {
+                gap: 15px;
+            }
+
+            .skills-grid,
+            .projects-grid,
+            .contacts-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <a href="#" class="logo">gogoweru</a>
+                <nav>
+                    <ul>
+                        <li><a href="#about">Обо мне</a></li>
+                        <li><a href="#skills">Навыки</a></li>
+                        <li><a href="#projects">Проекты</a></li>
+                        <li><a href="#contacts">Контакты</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>gogoweru</h1>
+            <p>Game Developer & Creative</p>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <div class="container">
+            <h2 class="section-title">Обо мне</h2>
+            <div class="about-content">
+                <p>Привет! Я начинающий создатель игр, программист, 3D моделер и музыкант. Увлекаюсь разработкой игр и постоянно изучаю новые технологии. В настоящее время осваиваю JavaScript, C#, Python и C++. Активно ищу команды для участия в геймджемах и совместных проектах. Готов учиться, развиваться и создавать крутые игры вместе с единомышленниками!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills">
+        <div class="container">
+            <h2 class="section-title">Навыки</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🎮</div>
+                    <h3>Игровые движки</h3>
+                    <p>Unity, Godot Engine</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">💻</div>
+                    <h3>Программирование</h3>
+                    <p>JavaScript, C#, Python, C++</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🌐</div>
+                    <h3>Web-разработка</h3>
+                    <p>HTML, CSS, JavaScript</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎨</div>
+                    <h3>3D моделирование</h3>
+                    <p>Создание 3D моделей и ассетов</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎵</div>
+                    <h3>Музыка</h3>
+                    <p>Создание саундтреков и эффектов</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🛠️</div>
+                    <h3>Инструменты</h3>
+                    <p>Visual Studio, Git</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects">
+        <div class="container">
+            <h2 class="section-title">Проекты</h2>
+            <div class="projects-grid">
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="images/leshiy.jpg" alt="Леший">
+                    </div>
+                    <div class="project-content">
+                        <h3>Леший</h3>
+                        <span class="platform-badge">🖥️ Windows | Desktop Game</span>
+                        <br><br>
+                        <p>Люди зашли слишком далеко. Они рубят вековые дубы, оставляют горы мусора и жгут костры на священных полянах. Твое терпение лопнуло.</p>
+                        <p>Ты — Леший. Древний дух леса, который больше не хочет просто пугать. Теперь ты кардинально решаешь проблему. Ты охотишься на незваных гостей, забираешь их жизни и используешь их силу, чтобы поддерживать Огонь Жизни — древний ритуал, который не даёт лесу умереть.</p>
+                        <p><strong>Что тебя ждёт:</strong></p>
+                        <p>🔥 <strong>Жестокая охота</strong><br>
+                        Убивай путников, чтобы Огонь Жизни не погас. Пока он горит — лес жив.</p>
+                        <p>🌲 <strong>Мрачный лес</strong><br>
+                        Тёмные чащи, где деревья — твои союзники, а путники — просто ресурс. Следи за границами своей территории.</p>
+                        <p>👥 <strong>Паникующие жертвы</strong><br>
+                        Бизнесмены, туристы в худи, полицейские — все они бегают, прячутся за деревьями и пытаются сбежать. Но от Лешего не скрыться.</p>
+                        <p>🔥 <strong>Древний ритуал</strong><br>
+                        Следи за Огнем. Каждая новая жизнь — это топливо. Не дай ему погаснуть.</p>
+                        <p><em>Природа мстит. Стань её гневом.</em></p>
+                        <div class="project-tags">
+                            <span class="tag">C#</span>
+                            <span class="tag">Desktop</span>
+                            <span class="tag">Windows</span>
+                            <span class="tag">Unity</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contacts Section -->
+    <section id="contacts">
+        <div class="container">
+            <h2 class="section-title">Контакты</h2>
+            <div class="contacts-grid">
+                <a href="https://t.me/GGogoweru" class="contact-card" target="_blank">
+                    <div class="contact-icon">📱</div>
+                    <h3>Telegram</h3>
+                    <p>@GGogoweru</p>
+                </a>
+                <a href="https://vk.com/gogoweru" class="contact-card" target="_blank">
+                    <div class="contact-icon">💬</div>
+                    <h3>VK</h3>
+                    <p>vk.com/gogoweru</p>
+                </a>
+                <a href="mailto:egorlehanov600@gmail.com" class="contact-card">
+                    <div class="contact-icon">📧</div>
+                    <h3>Email</h3>
+                    <p>egorlehanov600@gmail.com</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 gogoweru. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
